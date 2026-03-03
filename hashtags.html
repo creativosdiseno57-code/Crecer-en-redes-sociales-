@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="es-CO">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>Generador de hashtags 2026 | TikTok y Facebook</title>
+  <meta name="description" content="Genera hashtags por tema, intención y red (TikTok/Facebook). Copia en 1 clic. 2026." />
+  <meta name="robots" content="index,follow" />
+
+  <link rel="stylesheet" href="./styles.css" />
+
+  <style>
+    /* Estilos extra solo para el formulario (no dependen de tu CSS global) */
+    .wrap{ width:min(1120px, calc(100% - 32px)); margin: 0 auto; padding: 24px 0; }
+    .topbar{
+      display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap;
+      padding: 14px 0; border-bottom: 1px solid rgba(255,255,255,.14);
+    }
+    .brand{ display:flex; gap:10px; align-items:center; font-weight:800; letter-spacing:.2px; }
+    .brand-dot{
+      width:12px; height:12px; border-radius:999px;
+      background: linear-gradient(135deg, #6ee7ff, #a78bfa);
+      box-shadow: 0 0 0 6px rgba(110,231,255,.10);
+    }
+    .nav a{ color: rgba(255,255,255,.75); padding: 10px 10px; border-radius:12px; text-decoration:none; }
+    .nav a:hover{ background: rgba(255,255,255,.06); color: rgba(255,255,255,.92); }
+
+    .grid{ display:grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 16px; }
+    @media (max-width: 900px){ .grid{ grid-template-columns: 1fr; } }
+
+    .card{
+      padding:16px; border-radius:18px;
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.05);
+    }
+
+    .h1{ margin: 18px 0 6px; font-size: clamp(26px, 2.6vw, 38px); line-height: 1.15; }
+    .muted{ margin: 0 0 10px; color: rgba(255,255,255,.72); }
+
+    .field{ display:block; margin: 10px 0; }
+    .label{ display:block; margin:0 0 6px; color: rgba(255,255,255,.72); font-size: 14px; }
+    .input{
+      width:100%;
+      padding:12px 12px;
+      border-radius: 14px;
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.04);
+      color: rgba(255,255,255,.92);
+      outline: none;
+    }
+    .input:focus{
+      border-color: rgba(110,231,255,.50);
+      box-shadow: 0 0 0 4px rgba(110,231,255,.10);
+    }
+
+    .row{ display:flex; gap:10px; flex-wrap:wrap; margin-top: 10px; }
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center;
+      padding:12px 16px; border-radius: 14px;
+      border: 1px solid rgba(255,255,255,.18);
+      background: linear-gradient(135deg, rgba(110,231,255,.18), rgba(167,139,250,.14));
+      color: rgba(255,255,255,.92);
+      font-weight: 700;
+      cursor:pointer;
+    }
+    .btn:hover{ transform: translateY(-1px); }
+    .btn:active{ transform: translateY(0px); }
+    .btn-ghost{ background: rgba(255,255,255,.06); font-weight: 650; }
+
+    .output{
+      width:100%;
+      padding:12px 12px;
+      border-radius: 14px;
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(0,0,0,.20);
+      color: rgba(255,255,255,.92);
+      resize: vertical;
+      line-height: 1.6;
+    }
+    .status{ margin:10px 0 0; color: rgba(255,255,255,.72); font-size: 14px; }
+    .note{ margin: 10px 0 0; color: rgba(255,255,255,.72); font-size: 14px; }
+    .footer{ margin-top: 18px; padding: 16px 0; border-top: 1px solid rgba(255,255,255,.14); color: rgba(255,255,255,.70); }
+    code.inline{ background: rgba(255,255,255,.08); padding: 2px 6px; border-radius: 8px; }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <header class="topbar">
+      <div class="brand">
+        <span class="brand-dot" aria-hidden="true"></span>
+        <span>Growth 2026</span>
+      </div>
+      <nav class="nav" aria-label="Navegación">
+        <a href="./index.html">Inicio</a>
+        <a href="./hashtags.html">Hashtags</a>
+      </nav>
+    </header>
+
+    <h1 class="h1">Generador de hashtags 2026</h1>
+    <p class="muted">Genera hashtags por tema, intención y red. Luego copia con un clic.</p>
+
+    <div class="grid">
+      <section class="card" aria-label="Formulario del generador">
+        <!-- OJO: no usamos <form> para evitar submits accidentales -->
+        <label class="field">
+          <span class="label">Tema principal (obligatorio)</span>
+          <input id="topic" class="input" type="text" placeholder="Ej: marketing digital, comida, barbería, finca, gimnasio..." />
+        </label>
+
+        <label class="field">
+          <span class="label">Intención</span>
+          <select id="intent" class="input">
+            <option value="tutorial">Tutorial / cómo hacer</option>
+            <option value="tips">Tips rápidos</option>
+            <option value="errores">Errores comunes</option>
+            <option value="caso">Caso real / resultados</option>
+            <option value="ventas">Oferta / negocio</option>
+          </select>
+        </label>
+
+        <label class="field">
+          <span class="label">Red</span>
+          <select id="network" class="input">
+            <option value="tiktok">TikTok</option>
+            <option value="facebook">Facebook</option>
+            <option value="ambas">Ambas</option>
+          </select>
+        </label>
+
+        <label class="field">
+          <span class="label">Ubicación (opcional)</span>
+          <input id="location" class="input" type="text" placeholder="Ej: Villanueva Casanare Colombia" />
+        </label>
+
+        <label class="field">
+          <span class="label">Cantidad (10 a 40)</span>
+          <input id="count" class="input" type="number" min="10" max="40" value="25" />
+        </label>
+
+        <div class="row">
+          <button class="btn" id="generate" type="button">Generar</button>
+          <button class="btn btn-ghost" id="copy" type="button" disabled>Copiar</button>
+        </div>
+
+        <p class="note">
+          Si al abrir tu sitio ves texto de JS, estás abriendo <code class="inline">hashtags.js</code> en vez de <code class="inline">hashtags.html</code>.
+        </p>
+      </section>
+
+      <section class="card" aria-label="Resultado">
+        <h2 style="margin:0 0 8px; font-size:18px;">Resultado</h2>
+        <textarea id="output" class="output" rows="12" readonly placeholder="Aquí aparecerán tus hashtags..."></textarea>
+        <p id="status" class="status"></p>
+      </section>
+    </div>
+
+    <footer class="footer">
+      <small>Tip: si algo no funciona, revisa que el archivo exista y que la ruta sea exacta (GitHub Pages distingue mayúsculas/minúsculas). [web:60]</small>
+    </footer>
+  </div>
+
+  <!-- Importante: ruta relativa correcta al estar en la misma carpeta -->
+  <script src="./hashtags.js" defer></script>
+</body>
+</html>
