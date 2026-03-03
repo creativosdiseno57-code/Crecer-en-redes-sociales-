@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="es-CO">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>Generador de hashtags 2026 | TikTok + Facebook</title>
+  <meta name="description" content="Genera hashtags por tema, intención y formato para TikTok y Facebook. Copia en 1 clic. 2026." />
+  <link rel="canonical" href="https://TUUSUARIO.github.io/TUREPO/hashtags.html" />
+  <meta name="robots" content="index,follow" />
+
+  <meta property="og:title" content="Generador de hashtags 2026" />
+  <meta property="og:description" content="Hashtags listos para copiar (TikTok y Facebook)." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://TUUSUARIO.github.io/TUREPO/hashtags.html" />
+
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="./" aria-label="Volver a la página principal">
+        <span class="logo-dot" aria-hidden="true"></span>
+        <span>Growth 2026</span>
+      </a>
+
+      <nav class="nav" style="display:flex">
+        <a href="./#tiktok">TikTok</a>
+        <a href="./#facebook">Facebook</a>
+        <a class="btn btn-small" href="./">Inicio</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="section">
+    <div class="container">
+      <div class="section-head">
+        <h1 style="margin:0; font-size: clamp(26px, 2.6vw, 36px);">Generador de hashtags 2026</h1>
+        <p style="margin:0; color: var(--muted);">Crea una mezcla: nicho + intención + formato + ubicación (opcional).</p>
+      </div>
+
+      <div class="grid-2">
+        <section class="card" aria-label="Formulario">
+          <h3>Datos</h3>
+
+          <label class="field">
+            <span class="field-label">Tema principal (obligatorio)</span>
+            <input id="topic" class="input" type="text" placeholder="Ej: marketing digital, finca, gym, comida rápida..." />
+          </label>
+
+          <label class="field">
+            <span class="field-label">Intención</span>
+            <select id="intent" class="input">
+              <option value="tutorial">Tutorial / cómo hacer</option>
+              <option value="tips">Tips rápidos</option>
+              <option value="errores">Errores comunes</option>
+              <option value="caso">Caso real / resultados</option>
+              <option value="ventas">Oferta / negocio</option>
+            </select>
+          </label>
+
+          <label class="field">
+            <span class="field-label">Red</span>
+            <select id="network" class="input">
+              <option value="tiktok">TikTok</option>
+              <option value="facebook">Facebook</option>
+              <option value="ambas">Ambas</option>
+            </select>
+          </label>
+
+          <label class="field">
+            <span class="field-label">Ubicación (opcional)</span>
+            <input id="location" class="input" type="text" placeholder="Ej: Villanueva, Casanare, Colombia" />
+          </label>
+
+          <label class="field">
+            <span class="field-label">Cantidad</span>
+            <input id="count" class="input" type="number" min="10" max="40" value="25" />
+          </label>
+
+          <div class="cta-row" style="margin-top: 12px;">
+            <button class="btn" id="generate">Generar</button>
+            <button class="btn btn-ghost" id="copy" disabled>Copiar</button>
+          </div>
+
+          <p style="margin:12px 0 0; color: var(--muted); font-size: 14px;">
+            Sugerencia: usa 3–8 hashtags muy relevantes y evita los que no tengan que ver con tu video.
+          </p>
+        </section>
+
+        <section class="card" aria-label="Resultado">
+          <h3>Resultado</h3>
+          <textarea id="output" class="output" rows="12" readonly placeholder="Aquí saldrán tus hashtags..."></textarea>
+          <p id="status" style="margin:10px 0 0; color: var(--muted); font-size: 14px;"></p>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <style>
+    .field{ display:block; margin: 10px 0; }
+    .field-label{ display:block; margin:0 0 6px; color: var(--muted); font-size: 14px; }
+    .input{
+      width:100%;
+      padding:12px 12px;
+      border-radius: 14px;
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.04);
+      color: var(--text);
+      outline: none;
+    }
+    .input:focus{ border-color: rgba(110,231,255,.5); box-shadow: 0 0 0 4px rgba(110,231,255,.10); }
+    .output{
+      width:100%;
+      padding:12px 12px;
+      border-radius: 14px;
+      border:1px solid var(--line);
+      background: rgba(0,0,0,.20);
+      color: var(--text);
+      resize: vertical;
+      line-height: 1.6;
+    }
+  </style>
+
+  <script src="hashtags.js" defer></script>
+</body>
+</html>
