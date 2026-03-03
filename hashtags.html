@@ -1,128 +1,127 @@
-<!doctype html>
-<html lang="es-CO">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+const $ = (id) => document.getElementById(id);
 
-  <title>Generador de hashtags 2026 | TikTok + Facebook</title>
-  <meta name="description" content="Genera hashtags por tema, intención y formato para TikTok y Facebook. Copia en 1 clic. 2026." />
-  <link rel="canonical" href="https://TUUSUARIO.github.io/TUREPO/hashtags.html" />
-  <meta name="robots" content="index,follow" />
+function slugify(text) {
+  return (text || "")
+    .normalize("NFD").replace(/[̀-ͯ]/g, "")
+    .replace(/[^a-zA-Z0-9s]/g, " ")
+    .trim()
+    .replace(/s+/g, " ");
+}
 
-  <meta property="og:title" content="Generador de hashtags 2026" />
-  <meta property="og:description" content="Hashtags listos para copiar (TikTok y Facebook)." />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://TUUSUARIO.github.io/TUREPO/hashtags.html" />
+function toHashtag(word) {
+  const clean = slugify(word).split(" ").filter(Boolean);
+  if (!clean.length) return "";
+  const camel = clean.map((w, i) =>
+    i === 0 ? w.toLowerCase() : (w[0].toUpperCase() + w.slice(1).toLowerCase())
+  ).join("");
+  return "#" + camel;
+}
 
-  <link rel="stylesheet" href="styles.css" />
-</head>
+function unique(arr) {
+  return [...new Set(arr.filter(Boolean))];
+}
 
-<body>
-  <header class="site-header">
-    <div class="container header-inner">
-      <a class="brand" href="./" aria-label="Volver a la página principal">
-        <span class="logo-dot" aria-hidden="true"></span>
-        <span>Growth 2026</span>
-      </a>
+function buildHashtags({ topic, intent, network, location, count }) {
+  const baseTopic = slugify(topic);
+  const baseLoc = slugify(location);
 
-      <nav class="nav" style="display:flex">
-        <a href="./#tiktok">TikTok</a>
-        <a href="./#facebook">Facebook</a>
-        <a class="btn btn-small" href="./">Inicio</a>
-      </nav>
-    </div>
-  </header>
+  const intentMap = {
+    tutorial: ["como hacer", "paso a paso", "guia", "tutorial", "aprende"],
+    tips: ["tips", "consejos", "trucos", "hack", "rapido"],
+    errores: ["errores", "no lo hagas", "aprendizaje", "mejoras"],
+    caso: ["caso real", "resultados", "antes y despues", "experiencia"],
+    ventas: ["emprendimiento", "negocio", "ventas", "cliente", "oferta"]
+  };
 
-  <main class="section">
-    <div class="container">
-      <div class="section-head">
-        <h1 style="margin:0; font-size: clamp(26px, 2.6vw, 36px);">Generador de hashtags 2026</h1>
-        <p style="margin:0; color: var(--muted);">Crea una mezcla: nicho + intención + formato + ubicación (opcional).</p>
-      </div>
+  const networkTags =
+    network === "tiktok" ? ["tiktok", "tiktokcolombia", "parati", "fyp"] :
+    network === "facebook" ? ["facebook", "facebookreels", "reels", "comunidad"] :
+    ["tiktok", "facebook", "reels", "creadores"];
 
-      <div class="grid-2">
-        <section class="card" aria-label="Formulario">
-          <h3>Datos</h3>
+  const genericGrowth = [
+    "crecimiento organico", "marketing digital", "creadores de contenido",
+    "estrategia", "contenido", "viral", "alcance", "engagement",
+    "2026"
+  ];
 
-          <label class="field">
-            <span class="field-label">Tema principal (obligatorio)</span>
-            <input id="topic" class="input" type="text" placeholder="Ej: marketing digital, finca, gym, comida rápida..." />
-          </label>
+  const pieces = [];
 
-          <label class="field">
-            <span class="field-label">Intención</span>
-            <select id="intent" class="input">
-              <option value="tutorial">Tutorial / cómo hacer</option>
-              <option value="tips">Tips rápidos</option>
-              <option value="errores">Errores comunes</option>
-              <option value="caso">Caso real / resultados</option>
-              <option value="ventas">Oferta / negocio</option>
-            </select>
-          </label>
+  pieces.push(toHashtag(baseTopic));
+  pieces.push(toHashtag(baseTopic + " 2026"));
 
-          <label class="field">
-            <span class="field-label">Red</span>
-            <select id="network" class="input">
-              <option value="tiktok">TikTok</option>
-              <option value="facebook">Facebook</option>
-              <option value="ambas">Ambas</option>
-            </select>
-          </label>
+  const words = baseTopic.split(" ").filter(Boolean);
+  if (words.length >= 2) {
+    pieces.push(toHashtag(words.slice(0, 1).join(" ")));
+    pieces.push(toHashtag(words.slice(0, 2).join(" ")));
+  }
 
-          <label class="field">
-            <span class="field-label">Ubicación (opcional)</span>
-            <input id="location" class="input" type="text" placeholder="Ej: Villanueva, Casanare, Colombia" />
-          </label>
+  (intentMap[intent] || []).forEach(k => {
+    pieces.push(toHashtag(baseTopic + " " + k));
+    pieces.push(toHashtag(k));
+  });
 
-          <label class="field">
-            <span class="field-label">Cantidad</span>
-            <input id="count" class="input" type="number" min="10" max="40" value="25" />
-          </label>
+  networkTags.forEach(k => pieces.push(toHashtag(k)));
+  genericGrowth.forEach(k => pieces.push(toHashtag(k)));
 
-          <div class="cta-row" style="margin-top: 12px;">
-            <button class="btn" id="generate">Generar</button>
-            <button class="btn btn-ghost" id="copy" disabled>Copiar</button>
-          </div>
+  if (baseLoc) {
+    pieces.push(toHashtag(baseLoc));
+    pieces.push(toHashtag(baseTopic + " " + baseLoc));
+    pieces.push(toHashtag("colombia"));
+  }
 
-          <p style="margin:12px 0 0; color: var(--muted); font-size: 14px;">
-            Sugerencia: usa 3–8 hashtags muy relevantes y evita los que no tengan que ver con tu video.
-          </p>
-        </section>
+  return unique(pieces).slice(0, count).join(" ");
+}
 
-        <section class="card" aria-label="Resultado">
-          <h3>Resultado</h3>
-          <textarea id="output" class="output" rows="12" readonly placeholder="Aquí saldrán tus hashtags..."></textarea>
-          <p id="status" style="margin:10px 0 0; color: var(--muted); font-size: 14px;"></p>
-        </section>
-      </div>
-    </div>
-  </main>
+// Como usas defer, el DOM ya está listo cuando corre este JS:
+const topic = $("topic");
+const intent = $("intent");
+const network = $("network");
+const location = $("location");
+const count = $("count");
+const output = $("output");
+const status = $("status");
+const generate = $("generate");
+const copy = $("copy");
 
-  <style>
-    .field{ display:block; margin: 10px 0; }
-    .field-label{ display:block; margin:0 0 6px; color: var(--muted); font-size: 14px; }
-    .input{
-      width:100%;
-      padding:12px 12px;
-      border-radius: 14px;
-      border:1px solid var(--line);
-      background: rgba(255,255,255,.04);
-      color: var(--text);
-      outline: none;
+function setStatus(msg) { if (status) status.textContent = msg || ""; }
+
+if (!topic || !generate || !output) {
+  // Si esto pasa, es porque el JS se cargó en otra página o los IDs no coinciden
+  setStatus("Error: faltan elementos (revisa IDs o que estés en hashtags.html).");
+} else {
+  generate.addEventListener("click", () => {
+    const t = (topic.value || "").trim();
+    if (!t) {
+      output.value = "";
+      if (copy) copy.disabled = true;
+      setStatus("Escribe un tema principal para generar hashtags.");
+      topic.focus();
+      return;
     }
-    .input:focus{ border-color: rgba(110,231,255,.5); box-shadow: 0 0 0 4px rgba(110,231,255,.10); }
-    .output{
-      width:100%;
-      padding:12px 12px;
-      border-radius: 14px;
-      border:1px solid var(--line);
-      background: rgba(0,0,0,.20);
-      color: var(--text);
-      resize: vertical;
-      line-height: 1.6;
-    }
-  </style>
 
-  <script src="hashtags.js" defer></script>
-</body>
-</html>
+    const tags = buildHashtags({
+      topic: t,
+      intent: intent ? intent.value : "tips",
+      network: network ? network.value : "ambas",
+      location: (location ? location.value : "").trim(),
+      count: Math.max(10, Math.min(40, Number(count ? count.value : 25)))
+    });
+
+    output.value = tags;
+    if (copy) copy.disabled = !tags;
+    setStatus("Listo. Ajusta tema/ubicación para más precisión.");
+  });
+
+  if (copy) {
+    copy.addEventListener("click", async () => {
+      try {
+        await navigator.clipboard.writeText(output.value);
+        setStatus("Copiado al portapapeles.");
+      } catch {
+        setStatus("No se pudo copiar automático. Selecciona el texto y copia manual.");
+        output.focus();
+        output.select();
+      }
+    });
+  }
+}
